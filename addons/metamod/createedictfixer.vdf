@@ -1,0 +1,5 @@
+"Metamod Plugin"
+{
+	"alias"		"createedictfixer"
+	"file"		"addons/createedictfixer/bin/createedictfixer_mm"
+}
