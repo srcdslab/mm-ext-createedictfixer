@@ -70,7 +70,7 @@ edict_t * Hook_CreateEdict(int iIndex)
 		i++;
 	}
 
-	if (i == 2048) /* Maybe we should do something about 2047? */
+	if (i >= 2048) /* Maybe we should do something about 2047? */
 	{
 		RETURN_META_VALUE(MRES_IGNORED, 0);
 	}
