@@ -10,7 +10,7 @@ for cxx in builder.targets:
     if not cxx.target.arch in sdk.platformSpec[cxx.target.platform]:
       continue
 
-    binary = SM.HL2Library(builder, cxx, projectName + '.ext.' + sdk.ext, sdk)
+    binary = SM.HL2Library(builder, cxx, projectName + '_mm_i486', sdk)
 
     binary.compiler.defines += [
       'HAVE_STRING_H',
@@ -29,9 +29,6 @@ for cxx in builder.targets:
 
     binary.sources += [
       'cef.cpp',
-      os.path.join(SM.sm_root, 'extensions', 'sm-ext-common', 'mathstubs.c'),
-      os.path.join(SM.sm_root, 'public', 'smsdk_ext.cpp'),
-      os.path.join(SM.sm_root, 'public', 'CDetour', 'detours.cpp'),
       os.path.join(SM.sm_root, 'public', 'asm', 'asm.c'),
       os.path.join(SM.sm_root, 'public', 'libudis86', 'decode.c'),
       os.path.join(SM.sm_root, 'public', 'libudis86', 'itab.c'),

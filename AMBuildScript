@@ -471,7 +471,6 @@ class ExtensionConfig(object):
       os.path.join(self.sm_root, 'sourcepawn', 'include'),
       os.path.join(self.sm_root, 'public', 'amtl', 'amtl'),
       os.path.join(self.sm_root, 'public', 'amtl'),
-      os.path.join(self.sm_root, 'extensions', 'sm-ext-common', 'include'),
     ]
     return compiler
 
