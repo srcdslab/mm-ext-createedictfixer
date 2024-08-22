@@ -96,7 +96,6 @@ class ExtensionConfig(object):
     self.spvm = []
     self.extensions = []
     self.generated_headers = None
-    self.sm_root = None
     self.mms_root = None
     self.mysql_root = {}
     self.spcomp = None
@@ -173,21 +172,6 @@ class ExtensionConfig(object):
     if len(self.sdks) < 1 and len(sdk_list) and not use_none:
       raise Exception('No applicable SDKs were found, nothing to do')
 
-    if builder.options.sm_path:
-      self.sm_root = builder.options.sm_path
-    else:
-      self.sm_root = ResolveEnvPath('SOURCEMOD18', 'sourcemod-1.10')
-      if not self.sm_root:
-        self.sm_root = ResolveEnvPath('SOURCEMOD', 'sourcemod-source')
-      if not self.sm_root:
-        self.sm_root = ResolveEnvPath('SOURCEMOD_DEV', 'sourcemod-central')
-      if not self.sm_root:
-        self.sm_root = ResolveEnvPath('SOURCEMOD', 'sourcemod')
-
-    if not self.sm_root or not os.path.isdir(self.sm_root):
-      raise Exception('Could not find a source copy of Sourcemod')
-    self.sm_root = Normalize(self.sm_root)
-
     if builder.options.mms_path:
       self.mms_root = builder.options.mms_path
     else:
@@ -241,11 +225,6 @@ class ExtensionConfig(object):
       self.configure_mac(cxx)
     elif cxx.target.platform == 'windows':
       self.configure_windows(cxx)
-
-    # Finish up.
-    cxx.includes += [
-      os.path.join(self.sm_root, 'public'),
-    ]
 
   def configure_gcc(self, cxx):
     cxx.defines += [
@@ -466,11 +445,6 @@ class ExtensionConfig(object):
     compiler.cxxincludes += [
       os.path.join(context.currentSourcePath),
       os.path.join(context.currentSourcePath, 'sdk'),
-      os.path.join(self.sm_root, 'public'),
-      os.path.join(self.sm_root, 'public', 'extensions'),
-      os.path.join(self.sm_root, 'sourcepawn', 'include'),
-      os.path.join(self.sm_root, 'public', 'amtl', 'amtl'),
-      os.path.join(self.sm_root, 'public', 'amtl'),
     ]
     return compiler
 
