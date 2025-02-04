@@ -29,6 +29,7 @@ for cxx in builder.targets:
 
     binary.sources += [
       'cef.cpp',
+      os.path.join(SM.mms_root, 'extensions', 'sm-ext-common', 'mathstubs.c'),
     ]
 
     SM.extensions += [builder.Add(binary)]
