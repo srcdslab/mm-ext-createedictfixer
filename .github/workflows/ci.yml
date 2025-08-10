@@ -19,11 +19,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-20.04]
+        os: [ubuntu-22.04]
         metamod-version: [1.12-dev]
         python-version: ['3.11']
         include:
-          - os: ubuntu-20.04
+          - os: ubuntu-22.04
             target-arch: x86
             sdk: sdk2013
             sdk-version: 4c27c1305c5e042ae1f62f6dc6ba7e96fd06e05d
@@ -139,4 +139,3 @@ jobs:
           file: '*.tar.gz'
           tag: ${{ github.ref }}
           file_glob: true
-
