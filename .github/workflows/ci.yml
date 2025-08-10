@@ -85,7 +85,7 @@ jobs:
       - name: Create symlinks for sm-ext-common files
         run: |
           mkdir -p metamod-source/extensions/sm-ext-common
-          ln -sf metamod-source/extensions/sm-ext-common/src/mathstubs.c metamod-source/extensions/sm-ext-common/mathstubs.c
+          cp metamod-source/extensions/sm-ext-common/src/mathstubs.c metamod-source/extensions/sm-ext-common/mathstubs.c
 
       - name: Build
         working-directory: extension
