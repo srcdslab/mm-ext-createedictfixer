@@ -109,6 +109,8 @@ jobs:
     steps:
       - name: Download artifacts
         uses: actions/download-artifact@v5
+        with:
+          path: packages
 
       - name: Versioning
         run: |
@@ -121,13 +123,14 @@ jobs:
       - name: Package
         run: |
           ls -Rall
+          cd packages
           for dir in package-*/; do
             if [ -d "$dir" ]; then
               cd "$dir"
               pkg_name=${dir#package-}
               pkg_name=${pkg_name%/}
               pkg_name=$(echo "$pkg_name" | tr '[:upper:]' '[:lower:]')
-              tar -czf ../${{ github.event.repository.name }}-${{ env.RELEASE_VERSION }}-${pkg_name}.tar.gz -T <(\ls -1)
+              tar -czf ../../${{ github.event.repository.name }}-${{ env.RELEASE_VERSION }}-${pkg_name}.tar.gz -T <(\ls -1)
               cd -
             fi
           done
