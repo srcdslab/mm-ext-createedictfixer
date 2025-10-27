@@ -94,7 +94,7 @@ jobs:
           ambuild
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: package-${{ runner.os }}-${{ matrix.sdk }}-${{ matrix.target-arch }}
           path: extension/build/package
