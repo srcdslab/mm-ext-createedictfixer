@@ -51,12 +51,12 @@ jobs:
           python-version: ${{ matrix.python-version }}
   
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           path: extension
 
       - name: Checkout Metamod
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           repository: alliedmodders/metamod-source
           ref: ${{ matrix.metamod-version }}
@@ -64,7 +64,7 @@ jobs:
           submodules: recursive
 
       - name: Checkout hl2sdks
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           repository: alliedmodders/hl2sdk
           ref: ${{ matrix.sdk-version }}
@@ -77,7 +77,7 @@ jobs:
           python -m pip install git+https://github.com/alliedmodders/ambuild
 
       - name: Checkout sm-ext-common
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           repository: srcdslab/sm-ext-common
           path: metamod-source/extensions/sm-ext-common
