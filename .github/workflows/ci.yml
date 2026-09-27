@@ -25,8 +25,8 @@ jobs:
         include:
           - os: ubuntu-24.04
             target-arch: x86
-            sdk: sdk2013
-            sdk-version: 4c27c1305c5e042ae1f62f6dc6ba7e96fd06e05d
+            sdk: css
+            sdk-version: 6d5c02482085b9b02601cecd0a95661e1bcd64a9
             compiler_cc: clang
             compiler_cxx: clang++
 
