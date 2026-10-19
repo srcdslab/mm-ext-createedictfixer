@@ -1,0 +1,30 @@
+# vim: set sts=2 ts=8 sw=2 tw=99 et ft=python:
+import os
+
+projectName = 'createedictfixer'
+
+project = builder.LibraryProject(projectName)
+project.sources += [
+  os.path.join(Extension.ext_root, 'src', 'cef.cpp'),
+  os.path.join(Extension.ext_root, 'sm-ext-common', 'src', 'mathstubs.c'),
+]
+
+for sdk_name in Extension.sdks:
+  sdk = Extension.sdks[sdk_name]
+  if sdk['name'] in ['mock']:
+    continue
+
+  for cxx in builder.targets:
+    if not cxx.target.arch in sdk['platforms'][cxx.target.platform]:
+      continue
+
+    # Metamod:Source loads <file>_i486.so on x86 and <file>.x64.so on x86_64.
+    suffix = '_mm.x64' if cxx.target.arch == 'x86_64' else '_mm_i486'
+    binary = Extension.HL2Config(project, builder, cxx, projectName + suffix, sdk)
+    binary.compiler.defines += ['HAVE_STRING_H']
+
+    if cxx.target.platform == 'linux':
+      binary.compiler.postlink += ['-lpthread', '-lrt']
+
+for task in builder.Add(project):
+  Extension.mm_plugins.append((task, projectName))
