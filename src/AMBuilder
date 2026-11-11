@@ -18,8 +18,14 @@ for sdk_name in Extension.sdks:
     if not cxx.target.arch in sdk['platforms'][cxx.target.platform]:
       continue
 
-    # Metamod:Source loads <file>_i486.so on x86 and <file>.x64.so on x86_64.
-    suffix = '_mm.x64' if cxx.target.arch == 'x86_64' else '_mm_i486'
+    # Metamod:Source loads <file>.x64.<so|dll> on x86_64, <file>_i486.so on Linux x86
+    # and <file>.dll on Windows x86.
+    if cxx.target.arch == 'x86_64':
+      suffix = '_mm.x64'
+    elif cxx.target.platform == 'windows':
+      suffix = '_mm'
+    else:
+      suffix = '_mm_i486'
     binary = Extension.HL2Config(project, builder, cxx, projectName + suffix, sdk)
     binary.compiler.defines += ['HAVE_STRING_H']
 

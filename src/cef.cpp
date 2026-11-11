@@ -116,7 +116,7 @@ const char *CEF::GetLicense()
 
 const char *CEF::GetVersion()
 {
-	return "1.2.1";
+	return "1.2.2";
 }
 
 const char *CEF::GetDate()
